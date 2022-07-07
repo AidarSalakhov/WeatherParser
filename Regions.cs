@@ -14,29 +14,34 @@ namespace WeatherParser
         private string _regionUrl { get; set; }
 
         public static List<Regions> _listOfRegions = new List<Regions>();
-
-        public Regions(string regionName, string regionNameFirstLetter, string regionUrl)
-        {
-            _regionName = regionName;
-            _regionNameFirstLetter = regionNameFirstLetter;
-            _regionUrl = regionUrl;
-
-        }
-              
+                              
         public static List<Regions> ParseRegions(string url)
         {
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
 
-            var node = htmlDoc.DocumentNode.SelectNodes("//ul[@class='cities reg']//li//a");
+            var node = htmlDoc.DocumentNode.SelectNodes("//ul[@class='cities reg']");
 
-            foreach (HtmlNode line in node)
+            int regionsCount = node.Count();
+
+            foreach (var item in node)
             {
-                string outputText = line.InnerText;
+                Regions region = new Regions();
 
-                Console.WriteLine(outputText);
+                region._regionNameFirstLetter = item.SelectSingleNode(".//li[@class='cities-letter']").InnerText;
+
+                    Console.WriteLine(region._regionNameFirstLetter);      
+
+                region._regionName = item.SelectSingleNode(".//li").InnerText;
+
+                Console.WriteLine(region._regionName);
+
+                //region._regionUrl = item.SelectSingleNode(".//li//a[@href='resumeListItem']").InnerText;
+
+                _listOfRegions.Add(region);
             }
+
 
             return _listOfRegions;
         }
