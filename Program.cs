@@ -10,7 +10,9 @@ namespace WeatherParser
     {
         static void Main(string[] args)
         {
-            Menu.ShowMainMenu();
+            CitiesParser.ParseCities();
+
+            //Menu.ShowMainMenu();
         }
     }
 }

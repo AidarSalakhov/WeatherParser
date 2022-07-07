@@ -17,7 +17,7 @@ namespace WeatherParser
 
             switch (key)
             {
-                case ConsoleKey.O:
+                case ConsoleKey.P:
                     Console.Clear();
                     break;
 
