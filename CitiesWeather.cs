@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WeatherParser
 {
-    internal class LocationsWeather
+    internal class CitiesWeather : Cities
     {
+        private string _weather { get; set; }
     }
 }
