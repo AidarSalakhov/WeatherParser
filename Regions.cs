@@ -20,7 +20,7 @@ namespace WeatherParser
 
             var htmlDoc = htmlWeb.Load(url);
 
-            var citiesReg = htmlDoc.DocumentNode.SelectNodes("//ul[@class='cities reg']//li[not(contains(@class,'cities-letter'))]");
+            var citiesReg = htmlDoc.DocumentNode.SelectNodes("//ul[@class='cities reg']//li[not(contains(@class,'cities-letter'))]//a[@href]");
 
             foreach (var item in citiesReg)
             {
@@ -30,10 +30,9 @@ namespace WeatherParser
 
                 Console.WriteLine(region._regionName);
 
-                region._regionUrl = item.InnerHtml;
+                region._regionUrl = item.GetAttributeValue("href", null);
 
                 Console.WriteLine(region._regionUrl);
-
             }
             return _listOfRegions;
         }
