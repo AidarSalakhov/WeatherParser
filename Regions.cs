@@ -9,8 +9,9 @@ namespace WeatherParser
 {
     internal class Regions
     {
-        private string _regionName { get; set; }
-        private string _regionUrl { get; set; }
+        private string _regionName;
+
+        private string _regionUrl;
 
         public static List<Regions> _listOfRegions = new List<Regions>();
 
@@ -33,7 +34,10 @@ namespace WeatherParser
                 region._regionUrl = item.GetAttributeValue("href", null);
 
                 Console.WriteLine(region._regionUrl);
+
+                _listOfRegions.Add(region);
             }
+
             return _listOfRegions;
         }
     }

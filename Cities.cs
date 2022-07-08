@@ -9,63 +9,36 @@ namespace WeatherParser
 {
     internal class Cities
     {
-        
-        private string _region { get; set; }
-        private string _regionIdentificationLetter { get; set; }
-        private string _city { get; set; }
-        private string _weather { get; set; }
+        private string _cityName;
 
-        private static List<Cities> _listOfCities = new List<Cities>();
+        private string _cityUrl;
 
-        public Cities(string region, string regionIdentificationLetter, string city, string weather)
+        public static List<Cities> _listOfCities = new List<Cities>();
+
+        public static List<Cities> ParseCities(string url)
         {
-            _region = region;
-            _regionIdentificationLetter = regionIdentificationLetter;
-            _city = city;
-            _weather = weather;
-        }
+            HtmlWeb htmlWeb = new HtmlWeb();
 
-        public static Cities GetCity(int index)
-        {
-            return _listOfCities[index];
-        }
-        public static void SetCity(Cities city)
-        {
-            _listOfCities.Add(city);
-        }
+            var htmlDoc = htmlWeb.Load(url);
 
-        public static List<Cities> GetCitiesList(int index)
-        {
-            return _listOfCities;
-        }
+            var cityBlock = htmlDoc.DocumentNode.SelectNodes("//li[@class='city-block']//a[@href]");
 
-        public static void SetCitiesList(List<Cities> listOfCities)
-        {
-            _listOfCities = listOfCities;
-        }
-
-        public static List<Cities> ParseCities()
-        {
-            List<Cities> listOfCities = new List<Cities>();
-
-            var html = "https://world-weather.ru/pogoda/russia/adygea/";
-
-            HtmlWeb web = new HtmlWeb();
-
-            var htmlDoc = web.Load(html);
-
-            var node = htmlDoc.DocumentNode.SelectNodes("//li[@class='city-block']");
-
-            foreach (HtmlNode hn in node)
+            foreach (var item in cityBlock)
             {
-                string outputText = hn.InnerText;
+                Cities city = new Cities();
 
-                Console.WriteLine(outputText);
+                city._cityName = item.InnerText;
+
+                Console.WriteLine(city._cityName);
+
+                city._cityUrl = item.GetAttributeValue("href", null);
+
+                Console.WriteLine(city._cityUrl);
+
+                _listOfCities.Add(city);
             }
 
-            return listOfCities;
+            return _listOfCities;
         }
-
-
     }
 }

@@ -10,9 +10,11 @@ namespace WeatherParser
     {
         static void Main(string[] args)
         {
-            Regions.ParseRegions("https://world-weather.ru/pogoda/russia/");
-
             //Menu.ShowMainMenu();
+
+            //Regions.ParseRegions("https://world-weather.ru/pogoda/russia/");
+
+            //Cities.ParseCities("https://world-weather.ru/pogoda/russia/tatarstan/");
         }
     }
 }
