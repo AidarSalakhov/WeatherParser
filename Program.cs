@@ -15,6 +15,8 @@ namespace WeatherParser
             //Regions.ParseRegions("https://world-weather.ru/pogoda/russia/");
 
             //Cities.ParseCities("https://world-weather.ru/pogoda/russia/tatarstan/");
+
+            Weather.GetWeatherNow("https://world-weather.ru/pogoda/russia/kazan/");
         }
     }
 }
