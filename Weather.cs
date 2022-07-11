@@ -23,19 +23,20 @@ namespace WeatherParser
 
             var htmlDoc = htmlWeb.Load(url);
 
-            //var weatherNow = htmlDoc.DocumentNode.SelectNodes("//dt//span[not(contains(@class, 'min-max-tempCold')) and not(contains(@class, 'min-max-tempHot'))]");
-            
-            var weatherNow = htmlDoc.DocumentNode.SelectNodes("//div[@id='weather-now-description']//dl");
+            var parametersNodes = htmlDoc.DocumentNode.SelectNodes("//dt//span[not(contains(@class, 'min-max-tempCold')) and not(contains(@class, 'min-max-tempHot'))]");
 
-            foreach (var item in weatherNow)
+            var valueNodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='weather-now-description']//dl//dd");
+            
+
+            for (int i = 0; i < parametersNodes.Count; i++)
             {
                 WeatherStruct weatherStruct = new WeatherStruct();
 
-                weatherStruct.parameter = item.InnerText;
-
+                weatherStruct.parameter = parametersNodes[i].InnerText;
+                
                 Console.WriteLine(weatherStruct.parameter);
 
-                weatherStruct.value = item.GetAttributeValue("span", null);
+                weatherStruct.value = valueNodes[i].InnerText;
 
                 Console.WriteLine(weatherStruct.value);
 
