@@ -27,29 +27,20 @@ namespace WeatherParser
 
             WeatherStruct weatherStruct = new WeatherStruct();
 
-            weatherStruct.parameter = $"{htmlDoc.DocumentNode.SelectSingleNode("//h1").InnerText}. Сейчас";
-
-            Console.WriteLine(weatherStruct.parameter);
+            weatherStruct.parameter = $"{htmlDoc.DocumentNode.SelectSingleNode("//h1").InnerText} " +
+                $"{htmlDoc.DocumentNode.SelectSingleNode("//div[@class='weather-now-info']//p//span[not(contains(text(), '°'))]").InnerText.ToLower()}";
 
             weatherStruct.value = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='weather-now-info']//b[contains(text(), ':')]").InnerText;
 
-            Console.WriteLine(weatherStruct.value);
+            listOfWeather.Add(weatherStruct);
 
-            //h1 - "Погода в Казани"
+            weatherStruct.parameter = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='weather-now-info']//span/@title").GetAttributeValue("title", null);
 
-            //div[@class='weather-now-info']//span[not(contains(text(), '°'))] - "Сейчас"
+            weatherStruct.value = $"{htmlDoc.DocumentNode.SelectSingleNode("//div[@id='weather-now-number']").InnerText}";
 
-            //div[@class='weather-now-info']//b - "14:45, 11 июл"
-
-            //div[@class='weather-now-info']//span/@title - "Преимущественно ясно"
-
-            //div[@id='weather-now-number'] - "+30" 
-
-            //div[@id='weather-now-number']//span - "°"
-
+            listOfWeather.Add(weatherStruct);
 
             return listOfWeather;
-
         }
 
         public static List<WeatherStruct> GetWeatherNowAdditionalInformation(string url)
@@ -78,6 +69,26 @@ namespace WeatherParser
             }
 
             return listOfWeather;
+        }
+
+        public static string GetWeatherNowTextStyle(string url)
+        {
+            
+            HtmlWeb htmlWeb = new HtmlWeb();
+
+            var htmlDoc = htmlWeb.Load(url);
+
+            string weatherInfo = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='dw-into' and .//span[not(id='open-desc-weather')]]").InnerText;
+
+            //span[contains (class,'dw-into') and not(contains(@id, 'open-desc-weather')) and not(contains(@id,'close-desc-weather'))]
+
+            //span[@class='dw-into' and.//span[not(@id='open-desc-weather') and .//span[not(@id='close-desc-weather')]
+
+            //span[@class='dw-into' and .//span[not(id='open-desc-weather')]]  
+
+            Console.WriteLine(weatherInfo);
+
+            return weatherInfo;
         }
 
     }
