@@ -73,18 +73,15 @@ namespace WeatherParser
 
         public static string GetWeatherNowTextStyle(string url)
         {
-            
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
 
-            string weatherInfo = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='dw-into' and .//span[not(id='open-desc-weather')]]").InnerText;
+            string weatherInfo = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='dw-into']").InnerText;
 
-            //span[contains (class,'dw-into') and not(contains(@id, 'open-desc-weather')) and not(contains(@id,'close-desc-weather'))]
+            weatherInfo = weatherInfo.Replace("Скрыть", "");
 
-            //span[@class='dw-into' and.//span[not(@id='open-desc-weather') and .//span[not(@id='close-desc-weather')]
-
-            //span[@class='dw-into' and .//span[not(id='open-desc-weather')]]  
+            weatherInfo = weatherInfo.Replace("Подробнее", "");
 
             Console.WriteLine(weatherInfo);
 
