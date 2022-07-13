@@ -59,11 +59,7 @@ namespace WeatherParser
 
                 weatherStruct.parameter = parametersNodes[i].InnerText;
                 
-                Console.WriteLine(weatherStruct.parameter);
-
                 weatherStruct.value = valueNodes[i].InnerText;
-
-                Console.WriteLine(weatherStruct.value);
 
                 listOfWeather.Add(weatherStruct);
             }
@@ -83,10 +79,39 @@ namespace WeatherParser
 
             weatherInfo = weatherInfo.Replace("Подробнее", "");
 
-            Console.WriteLine(weatherInfo);
-
             return weatherInfo;
         }
 
+        public static List<WeatherStruct> GetWeatherWeek(string url)
+        {
+            HtmlWeb htmlWeb = new HtmlWeb();
+
+            var htmlDoc = htmlWeb.Load(url);
+
+            var nameDayOfWeekNodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='day-week']");
+
+            var dayOfMonthNodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='numbers-month']");
+
+            var nameOfMonthNodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='month']");
+
+            var weatherNodes = htmlDoc.DocumentNode.SelectNodes("//li//span/@title");
+
+            var dayTemperatureNodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='day-temperature']");
+
+            var nightTemperatureNodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='night-temperature']");
+
+            for (int i = 0; i < nameDayOfWeekNodes.Count; i++)
+            {
+                WeatherStruct weatherStruct = new WeatherStruct();
+
+                weatherStruct.parameter = $"{nameDayOfWeekNodes[i].InnerText}, {dayOfMonthNodes[i].InnerText} {nameOfMonthNodes[i].InnerText}";
+
+                weatherStruct.value = $"{weatherNodes[i].GetAttributeValue("title", null)}. Днём: {dayTemperatureNodes[i].InnerText}, Ночью: {nightTemperatureNodes[i].InnerText}";
+
+                listOfWeather.Add(weatherStruct);
+            }
+
+            return listOfWeather;
+        }
     }
 }
