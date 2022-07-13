@@ -9,9 +9,9 @@ namespace WeatherParser
 {
     internal class Regions
     {
-        private string _regionName;
+        private string? _regionName;
 
-        private string _regionUrl;
+        private string? _regionUrl;
 
         public static List<Regions> _listOfRegions = new List<Regions>();
 

@@ -9,9 +9,9 @@ namespace WeatherParser
 {
     internal class Cities
     {
-        private string _cityName;
+        private string? _cityName;
 
-        private string _cityUrl;
+        private string? _cityUrl;
 
         public static List<Cities> _listOfCities = new List<Cities>();
 
