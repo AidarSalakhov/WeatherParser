@@ -22,7 +22,7 @@ namespace WeatherParser
                     MessagesViewer.WriteLine(Messages.ENTER_REGION_NUMBER);
                     Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine()))));
                     MessagesViewer.WriteLine(Messages.ENTER_CITY_NUMBER);
-                    Weather.GetWeatherNow(Cities.GetCityUrl(Convert.ToInt32(Console.ReadLine())));
+                    Weather.GetWeatherNow($"https:{Cities.GetCityUrl(Convert.ToInt32(Console.ReadLine()))}");
 
                     break;
 
