@@ -18,10 +18,11 @@ namespace WeatherParser
             switch (key)
             {
                 case ConsoleKey.W:
-                    Console.Clear();
                     Regions.PrintRegions(Regions.ParseRegions("https://world-weather.ru/pogoda/russia/"));
                     MessagesViewer.WriteLine(Messages.ENTER_REGION_NUMBER);
-                    Console.ReadLine();
+                    Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine()))));
+                    MessagesViewer.WriteLine(Messages.ENTER_CITY_NUMBER);
+                    Weather.GetWeatherNow(Cities.GetCityUrl(Convert.ToInt32(Console.ReadLine())));
 
                     break;
 

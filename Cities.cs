@@ -39,10 +39,23 @@ namespace WeatherParser
 
         public static void PrintCities(List<Cities> cities)
         {
+            Console.Clear();
+
             for (int i = 0; i < cities.Count; i++)
             {
                 MessagesViewer.WriteLine($"[{i + 1}] {cities[i]._cityName}");
             }
+        }
+
+        public static string GetCityUrl(int cityNumber)
+        {
+            Cities city = new Cities();
+
+            city = _listOfCities[cityNumber - 1];
+
+            string url = city._cityUrl ?? string.Empty;
+
+            return url;
         }
     }
 }

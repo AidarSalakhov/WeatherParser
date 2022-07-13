@@ -38,6 +38,8 @@ namespace WeatherParser
 
         public static void PrintRegions(List<Regions> regions)
         {
+            Console.Clear();
+
             for (int i = 0; i < regions.Count; i++)
             {
                 MessagesViewer.WriteLine($"[{i+1}] {regions[i]._regionName}");
@@ -48,11 +50,11 @@ namespace WeatherParser
         {
             Regions region = new Regions();
 
-            region = _listOfRegions[regionNumber];
+            region = _listOfRegions[regionNumber - 1];
 
-            string result = region._regionUrl ?? string.Empty;
+            string url = region._regionUrl ?? string.Empty;
 
-            return result;
+            return url;
         }
     }
 }
