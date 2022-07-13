@@ -20,7 +20,9 @@ namespace WeatherParser
 
             //Weather.GetWeatherNowTextStyle("https://world-weather.ru/pogoda/russia/kazan/");
 
-            Weather.GetWeatherWeek("https://world-weather.ru/pogoda/russia/kazan/");
+            //Weather.GetWeatherWeek("https://world-weather.ru/pogoda/russia/kazan/");
+
+            Weather.PrintWeather(Weather.GetWeatherNowAdditionalInformation("https://world-weather.ru/pogoda/russia/kazan/"));
         }
     }
 }

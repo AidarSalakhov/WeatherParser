@@ -67,7 +67,7 @@ namespace WeatherParser
             return listOfWeather;
         }
 
-        public static string GetWeatherNowTextStyle(string url)
+        public static string GetWeatherNowString(string url)
         {
             HtmlWeb htmlWeb = new HtmlWeb();
 
@@ -104,14 +104,22 @@ namespace WeatherParser
             {
                 WeatherStruct weatherStruct = new WeatherStruct();
 
-                weatherStruct.parameter = $"{nameDayOfWeekNodes[i].InnerText}, {dayOfMonthNodes[i].InnerText} {nameOfMonthNodes[i].InnerText}";
+                weatherStruct.parameter = $"{nameDayOfWeekNodes[i].InnerText} {dayOfMonthNodes[i].InnerText} {nameOfMonthNodes[i].InnerText}";
 
-                weatherStruct.value = $"{weatherNodes[i].GetAttributeValue("title", null)}. Днём: {dayTemperatureNodes[i].InnerText}, Ночью: {nightTemperatureNodes[i].InnerText}";
+                weatherStruct.value = $"{weatherNodes[i].GetAttributeValue("title", null)}, днём: {dayTemperatureNodes[i].InnerText}, ночью: {nightTemperatureNodes[i].InnerText}";
 
                 listOfWeather.Add(weatherStruct);
             }
 
             return listOfWeather;
+        }
+
+        public static void PrintWeather(List<WeatherStruct> weatherStruct)
+        {
+            foreach (WeatherStruct weather in weatherStruct)
+            {
+                MessagesViewer.WriteLine($"{weather.parameter}: {weather.value}");
+            }
         }
     }
 }
