@@ -43,5 +43,16 @@ namespace WeatherParser
                 MessagesViewer.WriteLine($"[{i+1}] {regions[i]._regionName}");
             }
         }
+
+        public static string GetRegionUrl(int regionNumber)
+        {
+            Regions region = new Regions();
+
+            region = _listOfRegions[regionNumber];
+
+            string result = region._regionUrl ?? string.Empty;
+
+            return result;
+        }
     }
 }
