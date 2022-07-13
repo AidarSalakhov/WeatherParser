@@ -29,16 +29,20 @@ namespace WeatherParser
 
                 city._cityName = item.InnerText;
 
-                Console.WriteLine(city._cityName);
-
                 city._cityUrl = item.GetAttributeValue("href", null);
-
-                Console.WriteLine(city._cityUrl);
 
                 _listOfCities.Add(city);
             }
 
             return _listOfCities;
+        }
+
+        public static void PrintCities(List<Cities> cities)
+        {
+            for (int i = 0; i < cities.Count; i++)
+            {
+                MessagesViewer.WriteLine($"[{i + 1}] {cities[i]._cityName}");
+            }
         }
     }
 }

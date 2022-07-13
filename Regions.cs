@@ -9,9 +9,8 @@ namespace WeatherParser
 {
     internal class Regions
     {
-        private string? _regionName;
-
-        private string? _regionUrl;
+        private string? _regionName { get; set; }
+        private string? _regionUrl { get; set; }
 
         public static List<Regions> _listOfRegions = new List<Regions>();
 
@@ -29,16 +28,20 @@ namespace WeatherParser
 
                 region._regionName = item.InnerText;
 
-                Console.WriteLine(region._regionName);
-
                 region._regionUrl = item.GetAttributeValue("href", null);
-
-                Console.WriteLine(region._regionUrl);
 
                 _listOfRegions.Add(region);
             }
 
             return _listOfRegions;
+        }
+
+        public static void PrintRegions(List<Regions> regions)
+        {
+            for (int i = 0; i < regions.Count; i++)
+            {
+                MessagesViewer.WriteLine($"[{i+1}] {regions[i]._regionName}");
+            }
         }
     }
 }

@@ -22,7 +22,11 @@ namespace WeatherParser
 
             //Weather.GetWeatherWeek("https://world-weather.ru/pogoda/russia/kazan/");
 
-            Weather.PrintWeather(Weather.GetWeatherNowAdditionalInformation("https://world-weather.ru/pogoda/russia/kazan/"));
+            //Weather.PrintWeather(Weather.GetWeatherNowAdditionalInformation("https://world-weather.ru/pogoda/russia/kazan/"));
+
+            //Regions.PrintRegions(Regions.ParseRegions("https://world-weather.ru/pogoda/russia/"));
+
+            //Cities.PrintCities(Cities.ParseCities("https://world-weather.ru/pogoda/russia/tatarstan/"));
         }
     }
 }
