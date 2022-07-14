@@ -11,7 +11,7 @@ namespace WeatherParser
     {
         public static void ShowMainMenu()
         {
-            MessagesViewer.WriteLine(Messages.MENU_TEXT);
+            MessagesViewer.WriteLine(Messages.MAIN_MENU_TEXT);
 
             ConsoleKey key = Console.ReadKey(true).Key;
 
@@ -22,8 +22,9 @@ namespace WeatherParser
                     MessagesViewer.WriteLine(Messages.ENTER_REGION_NUMBER);
                     Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine()))));
                     MessagesViewer.WriteLine(Messages.ENTER_CITY_NUMBER);
-                    Weather.GetWeatherNow($"https:{Cities.GetCityUrl(Convert.ToInt32(Console.ReadLine()))}");
-
+                    string cityUrl = Cities.GetCityUrl(Convert.ToInt32(Console.ReadLine()));
+                    Weather.PrintWeather(Weather.GetWeatherNow(cityUrl));
+                    ShowWeatherMenu(cityUrl);
                     break;
 
                 case ConsoleKey.Escape:
@@ -36,6 +37,43 @@ namespace WeatherParser
                     break;
             }
             ShowMainMenu();
+        }
+
+        public static void ShowWeatherMenu(string cityUrl)
+        {
+            MessagesViewer.WriteLine(Messages.WEATHER_MENU_TEXT);
+
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+            switch (key)
+            {
+                case ConsoleKey.A:
+                    Console.Clear();
+                    Weather.PrintWeather(Weather.GetWeatherNowAdditionalInformation(cityUrl));
+                    ShowWeatherMenu(cityUrl);
+                    break;
+
+                case ConsoleKey.S:
+                    Console.Clear();
+                    Weather.PrintWeather(Weather.GetWeatherNowString(cityUrl));
+                    ShowWeatherMenu(cityUrl);
+                    break;
+
+                case ConsoleKey.D:
+                    Console.Clear();
+                    Weather.PrintWeather(Weather.GetWeatherWeek(cityUrl));
+                    ShowWeatherMenu(cityUrl);
+                    break;
+
+                case ConsoleKey.Escape:
+                    Process.GetCurrentProcess().Kill();
+                    break;
+
+                default:
+                    Console.Clear();
+                    MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
+                    break;
+            }
         }
     }
 }

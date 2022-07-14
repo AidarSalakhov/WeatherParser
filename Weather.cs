@@ -58,7 +58,7 @@ namespace WeatherParser
                 WeatherStruct weatherStruct = new WeatherStruct();
 
                 weatherStruct.parameter = parametersNodes[i].InnerText;
-                
+
                 weatherStruct.value = valueNodes[i].InnerText;
 
                 listOfWeather.Add(weatherStruct);
@@ -116,10 +116,19 @@ namespace WeatherParser
 
         public static void PrintWeather(List<WeatherStruct> weatherStruct)
         {
+            Console.Clear();
+
             foreach (WeatherStruct weather in weatherStruct)
             {
                 MessagesViewer.WriteLine($"{weather.parameter}: {weather.value}");
             }
+        }
+
+        public static void PrintWeather(string weatherInfo)
+        {
+            Console.Clear();
+
+            MessagesViewer.WriteLine(weatherInfo);
         }
     }
 }
