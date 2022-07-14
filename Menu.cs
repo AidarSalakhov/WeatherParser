@@ -18,6 +18,8 @@ namespace WeatherParser
             switch (key)
             {
                 case ConsoleKey.W:
+                    Regions.listOfRegions.Clear();
+                    Cities.listOfCities.Clear();
                     Regions.PrintRegions(Regions.ParseRegions("https://world-weather.ru/pogoda/russia/"));
                     MessagesViewer.WriteLine(Messages.ENTER_REGION_NUMBER);
                     Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine()))));
@@ -68,6 +70,11 @@ namespace WeatherParser
                     Console.Clear();
                     Weather.PrintWeather(Weather.GetWeatherWeek(cityUrl));
                     ShowWeatherMenu(cityName, cityUrl);
+                    break;
+
+                case ConsoleKey.Backspace:
+                    Console.Clear();
+                    ShowMainMenu();
                     break;
 
                 case ConsoleKey.Escape:

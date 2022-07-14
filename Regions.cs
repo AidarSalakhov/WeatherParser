@@ -12,10 +12,11 @@ namespace WeatherParser
         private string? _regionName { get; set; }
         private string? _regionUrl { get; set; }
 
-        public static List<Regions> _listOfRegions = new List<Regions>();
+        public static List<Regions> listOfRegions = new List<Regions>();
 
         public static List<Regions> ParseRegions(string url)
         {
+
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
@@ -30,10 +31,10 @@ namespace WeatherParser
 
                 region._regionUrl = item.GetAttributeValue("href", null);
 
-                _listOfRegions.Add(region);
+                listOfRegions.Add(region);
             }
 
-            return _listOfRegions;
+            return listOfRegions;
         }
 
         public static void PrintRegions(List<Regions> regions)
@@ -50,7 +51,7 @@ namespace WeatherParser
         {
             Regions region = new Regions();
 
-            region = _listOfRegions[regionNumber - 1];
+            region = listOfRegions[regionNumber - 1];
 
             string url = region._regionUrl ?? string.Empty;
 

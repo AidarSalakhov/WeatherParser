@@ -13,7 +13,7 @@ namespace WeatherParser
 
         private string? _cityUrl;
 
-        public static List<Cities> _listOfCities = new List<Cities>();
+        public static List<Cities> listOfCities = new List<Cities>();
 
         public static List<Cities> ParseCities(string url)
         {
@@ -31,10 +31,10 @@ namespace WeatherParser
 
                 city._cityUrl = item.GetAttributeValue("href", null);
 
-                _listOfCities.Add(city);
+                listOfCities.Add(city);
             }
 
-            return _listOfCities;
+            return listOfCities;
         }
 
         public static void PrintCities(List<Cities> cities)
@@ -51,7 +51,7 @@ namespace WeatherParser
         {
             Cities city = new Cities();
 
-            city = _listOfCities[cityNumber - 1];
+            city = listOfCities[cityNumber - 1];
 
             string cityUrl = $"https:{city._cityUrl}" ?? string.Empty;
 
@@ -62,7 +62,7 @@ namespace WeatherParser
         {
             Cities city = new Cities();
 
-            city = _listOfCities[cityNumber - 1];
+            city = listOfCities[cityNumber - 1];
 
             string cityName = city._cityName ?? string.Empty;
 

@@ -114,7 +114,7 @@ namespace WeatherParser
 
                 weatherStruct.parameter = $"{nameDayOfWeekNodes[i].InnerText} {dayOfMonthNodes[i].InnerText} {nameOfMonthNodes[i].InnerText}";
 
-                weatherStruct.value = $"{weatherNodes[i].GetAttributeValue("title", null)}, днём: {dayTemperatureNodes[i].InnerText}, ночью: {nightTemperatureNodes[i].InnerText}";
+                weatherStruct.value = $"{weatherNodes[i].GetAttributeValue("title", null)}, днём {dayTemperatureNodes[i].InnerText}, ночью {nightTemperatureNodes[i].InnerText}";
 
                 listOfWeather.Add(weatherStruct);
             }
