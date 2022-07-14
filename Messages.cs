@@ -8,12 +8,12 @@ namespace WeatherParser
 {
     internal class Messages
     {
-        public const string MAIN_MENU_TEXT = "---Погода в России---\n" +
+        public const string MAIN_MENU_TEXT = "\n---Погода в России---\n" +
             "\nТочный прогноз погоды в России по большинству городов на сегодня и на неделю." +
             "\nПодробные данные по температуре, осадкам, ветре и давлении.\n" +
             "\nВыберите действие: " +
             "\n[W] - Выбрать регион России" +
-            "\n[Escepe] - Выйти из программы";
+            "\n[Escape] - Выйти из программы";
 
         public const string WEATHER_MENU_TEXT = "Выберите действие: " +
             "\n[A] - Погода сегодня" +

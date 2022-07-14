@@ -16,7 +16,6 @@ namespace WeatherParser
 
         public static List<Regions> ParseRegions(string url)
         {
-
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
