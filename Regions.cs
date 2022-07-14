@@ -41,10 +41,48 @@ namespace WeatherParser
         {
             Console.Clear();
 
-            for (int i = 0; i < regions.Count; i++)
+            foreach (var region in regions)
             {
-                MessagesViewer.WriteLine($"[{i+1}] {regions[i]._regionName}");
+                MessagesViewer.WriteLine($"[{regions.IndexOf(region) + 1}] {region._regionName}");
             }
+
+
+            //double s = regions.Count / 3;
+
+            //int arrayRowsLength = (int)Math.Round(s / 10) * 10;
+
+            //int arrayColumns = 3;
+
+            //Regions[,] regionsArray = new Regions[arrayRowsLength, arrayColumns];
+
+            //int k = 0;
+
+            //for (int j = 0; j < arrayColumns; j++)
+            //{
+            //    if (j == 2)
+            //    {
+            //        arrayRowsLength = (arrayRowsLength * 3) - regions.Count;
+            //    }
+
+            //    for (int i = 0; i < arrayRowsLength; i++)
+            //    {
+            //        k++;
+            //        regionsArray[i, j] = regions[k - 1];
+            //    }
+            //}
+
+            //k = 0;
+
+            //for (int i = 0; i < arrayRowsLength; i++)
+            //{
+            //    for (int j = 0; j < arrayColumns; j++)
+            //    {
+            //        k++;
+            //        Console.Write(string.Format("{{0, -{0}}}", 38), $"[{k}] {regionsArray[i, j]._regionName}");
+            //    }
+            //    Console.WriteLine();
+            //}
+
         }
 
         public static string GetRegionUrl(int regionNumber)
@@ -59,3 +97,6 @@ namespace WeatherParser
         }
     }
 }
+
+
+
