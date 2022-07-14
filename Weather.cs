@@ -15,10 +15,10 @@ namespace WeatherParser
             internal string value;
         }
 
-        public static List<WeatherStruct> listOfWeather = new List<WeatherStruct>();
-
         public static List<WeatherStruct> GetWeatherNow(string url)
         {
+            List<WeatherStruct> listOfWeather = new List<WeatherStruct>();
+
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
@@ -45,6 +45,8 @@ namespace WeatherParser
 
         public static List<WeatherStruct> GetWeatherNowAdditionalInformation(string url)
         {
+            List<WeatherStruct> listOfWeather = new List<WeatherStruct>();
+
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
@@ -79,11 +81,17 @@ namespace WeatherParser
 
             weatherInfo = weatherInfo.Replace("Подробнее", "");
 
+            weatherInfo = weatherInfo.Replace("   ", " ");
+
+            weatherInfo = weatherInfo.Replace("  ", " ");
+
             return weatherInfo;
         }
 
         public static List<WeatherStruct> GetWeatherWeek(string url)
         {
+            List<WeatherStruct> listOfWeather = new List<WeatherStruct>();
+
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
@@ -116,18 +124,14 @@ namespace WeatherParser
 
         public static void PrintWeather(List<WeatherStruct> weatherStruct)
         {
-            Console.Clear();
-
             foreach (WeatherStruct weather in weatherStruct)
             {
-                MessagesViewer.WriteLine($"{weather.parameter}: {weather.value}");
+                MessagesViewer.WriteLine($"{weather.parameter} {weather.value}");
             }
         }
 
         public static void PrintWeather(string weatherInfo)
         {
-            Console.Clear();
-
             MessagesViewer.WriteLine(weatherInfo);
         }
     }

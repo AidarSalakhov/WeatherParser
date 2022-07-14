@@ -53,9 +53,20 @@ namespace WeatherParser
 
             city = _listOfCities[cityNumber - 1];
 
-            string url = $"https:{city._cityUrl}" ?? string.Empty;
+            string cityUrl = $"https:{city._cityUrl}" ?? string.Empty;
 
-            return url;
+            return cityUrl;
+        }
+
+        public static string GetCityName(int cityNumber)
+        {
+            Cities city = new Cities();
+
+            city = _listOfCities[cityNumber - 1];
+
+            string cityName = city._cityName ?? string.Empty;
+
+            return cityName;
         }
     }
 }
