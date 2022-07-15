@@ -22,13 +22,28 @@ namespace WeatherParser
                     Cities.listOfCities.Clear();
                     Regions.PrintRegions(Regions.ParseRegions("https://world-weather.ru/pogoda/russia/"));
                     MessagesViewer.WriteLine(Messages.ENTER_REGION_NUMBER);
-                    Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine()))));
+                    try { Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine())))); }
+                    catch (Exception) 
+                    {
+                        Console.Clear();
+                        MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
+                        ShowMainMenu(); 
+                    }
                     MessagesViewer.WriteLine(Messages.ENTER_CITY_NUMBER);
-                    int cityNumber = Convert.ToInt32(Console.ReadLine());
-                    string cityUrl = Cities.GetCityUrl(cityNumber);
-                    string cityName = Cities.GetCityName(cityNumber);
-                    Console.Clear();
-                    ShowWeatherMenu(cityName, cityUrl);
+                    try
+                    {
+                        int cityNumber = Convert.ToInt32(Console.ReadLine());
+                        string cityUrl = Cities.GetCityUrl(cityNumber);
+                        string cityName = Cities.GetCityName(cityNumber);
+                        Console.Clear();
+                        ShowWeatherMenu(cityName, cityUrl);
+                    }
+                    catch (Exception)
+                    {
+                        Console.Clear();
+                        MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
+                        ShowMainMenu();
+                    }
                     break;
 
                 case ConsoleKey.Escape:
