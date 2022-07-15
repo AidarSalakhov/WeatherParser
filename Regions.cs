@@ -40,48 +40,24 @@ namespace WeatherParser
         {
             Console.Clear();
 
-            foreach (var region in regions)
+            int index = 1;
+
+            for (int i = 0; i <= regions.Count / 3; i++)
             {
-                MessagesViewer.WriteLine($"[{regions.IndexOf(region) + 1}] {region._regionName}");
-            }
+                for (int j = 0; j < 3; j++)
+                {
+                    if (index > regions.Count)
+                    {
+                        continue;
+                    }
 
+                    MessagesViewer.Write("[{0,2}] {1,-32}", index, regions[index - 1]._regionName);
 
-            //double s = regions.Count / 3;
+                    index++;
+                }
 
-            //int arrayRowsLength = (int)Math.Round(s / 10) * 10;
-
-            //int arrayColumns = 3;
-
-            //Regions[,] regionsArray = new Regions[arrayRowsLength, arrayColumns];
-
-            //int k = 0;
-
-            //for (int j = 0; j < arrayColumns; j++)
-            //{
-            //    if (j == 2)
-            //    {
-            //        arrayRowsLength = (arrayRowsLength * 3) - regions.Count;
-            //    }
-
-            //    for (int i = 0; i < arrayRowsLength; i++)
-            //    {
-            //        k++;
-            //        regionsArray[i, j] = regions[k - 1];
-            //    }
-            //}
-
-            //k = 0;
-
-            //for (int i = 0; i < arrayRowsLength; i++)
-            //{
-            //    for (int j = 0; j < arrayColumns; j++)
-            //    {
-            //        k++;
-            //        Console.Write(string.Format("{{0, -{0}}}", 38), $"[{k}] {regionsArray[i, j]._regionName}");
-            //    }
-            //    Console.WriteLine();
-            //}
-
+                MessagesViewer.WriteLine("");
+            };
         }
 
         public static string GetRegionUrl(int regionNumber)

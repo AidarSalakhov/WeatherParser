@@ -41,10 +41,24 @@ namespace WeatherParser
         {
             Console.Clear();
 
-            for (int i = 0; i < cities.Count; i++)
+            int index = 1;
+
+            for (int i = 0; i <= cities.Count / 3; i++)
             {
-                MessagesViewer.WriteLine($"[{i + 1}] {cities[i]._cityName}");
-            }
+                for (int j = 0; j < 3; j++)
+                {
+                    if (index > cities.Count)
+                    {
+                        continue;
+                    }
+
+                    MessagesViewer.Write("[{0,2}] {1,-32}", index, cities[index - 1]._cityName);
+
+                    index++;
+                }
+
+                MessagesViewer.WriteLine("");
+            };
         }
 
         public static string GetCityUrl(int cityNumber)

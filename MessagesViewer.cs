@@ -17,5 +17,10 @@ namespace WeatherParser
         {
             Console.Write(message);
         }
+
+        public static void Write(string format, object? arg0, object? arg1)
+        {
+            Console.Write(format, arg0, arg1);
+        }
     }
 }
