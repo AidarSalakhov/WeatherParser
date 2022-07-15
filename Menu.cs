@@ -18,7 +18,7 @@ namespace WeatherParser
             switch (key)
             {
                 case ConsoleKey.W:
-                    Weather.ShowWeather();
+                    Weather.ShowCityWeather();
                     break;
 
                 case ConsoleKey.Escape:
@@ -26,14 +26,16 @@ namespace WeatherParser
                     break;
 
                 default:
-                    ShowError();
+                    ShowMenuError();
                     break;
             }
+
+            ShowMainMenu();
         }
 
         public static void ShowWeatherMenu(string cityName, string cityUrl)
         {
-            MessagesViewer.WriteLine($"\n{ cityName}");
+            MessagesViewer.WriteLine($"\n{cityName}");
 
             MessagesViewer.WriteLine(Messages.WEATHER_MENU_TEXT);
 
@@ -42,8 +44,7 @@ namespace WeatherParser
             switch (key)
             {
                 case ConsoleKey.A:
-                    Weather.PrintWeather(Weather.GetWeatherNow(cityUrl));
-                    Weather.PrintWeather(Weather.GetWeatherNowAdditionalInformation(cityUrl));
+                    Weather.PrintWeather(Weather.GetWeatherNowStruct(cityUrl));
                     break;
 
                 case ConsoleKey.S:
@@ -51,7 +52,7 @@ namespace WeatherParser
                     break;
 
                 case ConsoleKey.D:
-                    Weather.PrintWeather(Weather.GetWeatherWeek(cityUrl));
+                    Weather.PrintWeather(Weather.GetWeatherWeekStruct(cityUrl));
                     break;
 
                 case ConsoleKey.Backspace:
@@ -64,20 +65,17 @@ namespace WeatherParser
                     break;
 
                 default:
-                    ShowError();
+                    ShowMenuError();
                     break;
             }
 
             ShowWeatherMenu(cityName, cityUrl);
         }
 
-        public static void ShowError()
+        public static void ShowMenuError()
         {
             Console.Clear();
-
             MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
-
-            ShowMainMenu();
         }
     }
 }

@@ -15,15 +15,13 @@ namespace WeatherParser
             internal string value;
         }
 
-        public static List<WeatherStruct> GetWeatherNow(string url)
+        public static List<WeatherStruct> GetWeatherNowStruct(string url)
         {
             List<WeatherStruct> listOfWeather = new List<WeatherStruct>();
 
             HtmlWeb htmlWeb = new HtmlWeb();
 
             var htmlDoc = htmlWeb.Load(url);
-
-            var weatherNowNodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='weather-now-info']");
 
             WeatherStruct weatherStruct = new WeatherStruct();
 
@@ -40,25 +38,12 @@ namespace WeatherParser
 
             listOfWeather.Add(weatherStruct);
 
-            return listOfWeather;
-        }
-
-        public static List<WeatherStruct> GetWeatherNowAdditionalInformation(string url)
-        {
-            List<WeatherStruct> listOfWeather = new List<WeatherStruct>();
-
-            HtmlWeb htmlWeb = new HtmlWeb();
-
-            var htmlDoc = htmlWeb.Load(url);
-
             var parametersNodes = htmlDoc.DocumentNode.SelectNodes("//dt//span[not(contains(@class, 'min-max-tempCold')) and not(contains(@class, 'min-max-tempHot'))]");
 
             var valueNodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='weather-now-description']//dl//dd");
 
             for (int i = 0; i < parametersNodes.Count; i++)
             {
-                WeatherStruct weatherStruct = new WeatherStruct();
-
                 weatherStruct.parameter = parametersNodes[i].InnerText;
 
                 weatherStruct.value = valueNodes[i].InnerText;
@@ -68,7 +53,7 @@ namespace WeatherParser
 
             return listOfWeather;
         }
-
+                
         public static string GetWeatherNowString(string url)
         {
             HtmlWeb htmlWeb = new HtmlWeb();
@@ -88,7 +73,7 @@ namespace WeatherParser
             return weatherInfo;
         }
 
-        public static List<WeatherStruct> GetWeatherWeek(string url)
+        public static List<WeatherStruct> GetWeatherWeekStruct(string url)
         {
             List<WeatherStruct> listOfWeather = new List<WeatherStruct>();
 
@@ -139,7 +124,7 @@ namespace WeatherParser
             MessagesViewer.WriteLine(weatherInfo);
         }
 
-        public static void ShowWeather()
+        public static void ShowCityWeather()
         {
             Regions.listOfRegions.Clear();
 
@@ -155,7 +140,8 @@ namespace WeatherParser
             }
             catch (Exception)
             {
-                Menu.ShowError();
+                Menu.ShowMenuError();
+                Menu.ShowMainMenu();
             }
 
             MessagesViewer.WriteLine(Messages.ENTER_CITY_NUMBER);
@@ -174,7 +160,8 @@ namespace WeatherParser
             }
             catch (Exception)
             {
-                Menu.ShowError();
+                Menu.ShowMenuError();
+                Menu.ShowMainMenu();
             }
         }
     }
