@@ -18,32 +18,7 @@ namespace WeatherParser
             switch (key)
             {
                 case ConsoleKey.W:
-                    Regions.listOfRegions.Clear();
-                    Cities.listOfCities.Clear();
-                    Regions.PrintRegions(Regions.ParseRegions("https://world-weather.ru/pogoda/russia/"));
-                    MessagesViewer.WriteLine(Messages.ENTER_REGION_NUMBER);
-                    try { Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine())))); }
-                    catch (Exception) 
-                    {
-                        Console.Clear();
-                        MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
-                        ShowMainMenu(); 
-                    }
-                    MessagesViewer.WriteLine(Messages.ENTER_CITY_NUMBER);
-                    try
-                    {
-                        int cityNumber = Convert.ToInt32(Console.ReadLine());
-                        string cityUrl = Cities.GetCityUrl(cityNumber);
-                        string cityName = Cities.GetCityName(cityNumber);
-                        Console.Clear();
-                        ShowWeatherMenu(cityName, cityUrl);
-                    }
-                    catch (Exception)
-                    {
-                        Console.Clear();
-                        MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
-                        ShowMainMenu();
-                    }
+                    Weather.ShowWeather();
                     break;
 
                 case ConsoleKey.Escape:
@@ -51,11 +26,9 @@ namespace WeatherParser
                     break;
 
                 default:
-                    Console.Clear();
-                    MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
+                    ShowError();
                     break;
             }
-            ShowMainMenu();
         }
 
         public static void ShowWeatherMenu(string cityName, string cityUrl)
@@ -69,22 +42,16 @@ namespace WeatherParser
             switch (key)
             {
                 case ConsoleKey.A:
-                    Console.Clear();
                     Weather.PrintWeather(Weather.GetWeatherNow(cityUrl));
                     Weather.PrintWeather(Weather.GetWeatherNowAdditionalInformation(cityUrl));
-                    ShowWeatherMenu(cityName, cityUrl);
                     break;
 
                 case ConsoleKey.S:
-                    Console.Clear();
                     Weather.PrintWeather(Weather.GetWeatherNowString(cityUrl));
-                    ShowWeatherMenu(cityName, cityUrl);
                     break;
 
                 case ConsoleKey.D:
-                    Console.Clear();
                     Weather.PrintWeather(Weather.GetWeatherWeek(cityUrl));
-                    ShowWeatherMenu(cityName, cityUrl);
                     break;
 
                 case ConsoleKey.Backspace:
@@ -97,10 +64,20 @@ namespace WeatherParser
                     break;
 
                 default:
-                    Console.Clear();
-                    MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
+                    ShowError();
                     break;
             }
+
+            ShowWeatherMenu(cityName, cityUrl);
+        }
+
+        public static void ShowError()
+        {
+            Console.Clear();
+
+            MessagesViewer.WriteLine(Messages.ERROR_WRONG_BUTTON);
+
+            ShowMainMenu();
         }
     }
 }

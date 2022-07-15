@@ -124,6 +124,8 @@ namespace WeatherParser
 
         public static void PrintWeather(List<WeatherStruct> weatherStruct)
         {
+            Console.Clear();
+
             foreach (WeatherStruct weather in weatherStruct)
             {
                 MessagesViewer.WriteLine($"{weather.parameter} {weather.value}");
@@ -132,7 +134,48 @@ namespace WeatherParser
 
         public static void PrintWeather(string weatherInfo)
         {
+            Console.Clear();
+
             MessagesViewer.WriteLine(weatherInfo);
+        }
+
+        public static void ShowWeather()
+        {
+            Regions.listOfRegions.Clear();
+
+            Cities.listOfCities.Clear();
+
+            Regions.PrintRegions(Regions.ParseRegions("https://world-weather.ru/pogoda/russia/"));
+
+            MessagesViewer.WriteLine(Messages.ENTER_REGION_NUMBER);
+
+            try
+            {
+                Cities.PrintCities(Cities.ParseCities(Regions.GetRegionUrl(Convert.ToInt32(Console.ReadLine())))); 
+            }
+            catch (Exception)
+            {
+                Menu.ShowError();
+            }
+
+            MessagesViewer.WriteLine(Messages.ENTER_CITY_NUMBER);
+
+            try
+            {
+                int cityNumber = Convert.ToInt32(Console.ReadLine());
+
+                string cityUrl = Cities.GetCityUrl(cityNumber);
+
+                string cityName = Cities.GetCityName(cityNumber);
+
+                Console.Clear();
+
+                Menu.ShowWeatherMenu(cityName, cityUrl);
+            }
+            catch (Exception)
+            {
+                Menu.ShowError();
+            }
         }
     }
 }

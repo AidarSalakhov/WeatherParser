@@ -26,7 +26,6 @@ namespace WeatherParser
 
         public const string ENTER_CITY_NUMBER = "\nВведите номер города, указанный в квадратных скобках: ";
 
-
         public const string ERROR_WRONG_BUTTON = "Ошибка! Вы ввели неверный символ";
     }
 }
